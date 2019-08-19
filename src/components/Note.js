@@ -8,9 +8,9 @@ class Note extends React.Component {
       title: this.title.value,
       content: this.content.value
     };
-    console.log(formData);
+    this.props.submitNote(formData, this.props.note.id);
   }
-
+ 
   render() {
     const { note } = this.props;
 
@@ -38,4 +38,3 @@ class Note extends React.Component {
 }
 
 export default Note;
- 
