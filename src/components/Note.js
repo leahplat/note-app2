@@ -2,9 +2,10 @@ import React from 'react';
 
 class Note extends React.Component {
 
+
   onSubmit(e) {
     e.preventDefault();
-    const formData = {
+    const formData = {    
       title: this.title.value,
       content: this.content.value
     };
@@ -16,12 +17,12 @@ class Note extends React.Component {
     const formData = {
       name: this.name.value
     };
-    this.props.submitTag(formData, this.props.note.id)
+    this.props.submitTag(formData, this.props.note.id);
     this.props.closeTagForm();
   }
 
   renderTagForm(note) {
-    if (note.id !== undefined) {
+    if (this.props.note.id !== undefined) {
       if (!this.props.newTag) {
         return (
           <span>
@@ -49,26 +50,26 @@ class Note extends React.Component {
     }
   }
 
-renderTags(note) {
-  if (note.tags) {
-    return note.tags.map((tag, index) =>
+  renderTags(note) {
+    if (note.tags) {
+      return note.tags.map((tag, index) =>
       <div
-        className="tag"
+       className="tag"
         key={index}
         onClick={(e) => this.props.deleteTag(note.id, tag.id)}
-      >
-        <span className="delete">
-          <i className="material-icons">delete</i>
+        >
+       <span className="delete">
+        <i className="material-icons">delete</i>
         </span>
         {tag.name}
       </div>
-    );
+      );
+    }
   }
-}
-  
 
-render() {
+  render() {
     const { note, closeTagForm } = this.props;
+
 
     return (
       <div className="note-container">
@@ -77,32 +78,30 @@ render() {
           onSubmit={(e) => this.onSubmit(e)} 
           onClick={() => closeTagForm()}
         >
-          <input
-            className="note-title-input"
-            type="text"
-            placeholder="Note Title..."
-            defaultValue={note.title}
-            ref={(input) => this.title = input}
-           />
-          <textarea
-            className="note-textarea"
-            placeholder="Type Here..."
-            defaultValue={note.content}
-            ref={(input) => this.content = input}
+        <input
+          className="note-title-input"
+          type="text"
+          placeholder="Note Title..."
+          defaultValue={note.title}
+          ref={(input) => this.title = input}
+          />
+        <textarea
+          className="note-textarea"
+          placeholder="Type Here..."
+          defaultValue={note.content}
+          ref={(input) => this.content =input}
           />
           <input className="note-button" type="submit" value="Submit" />
         </form>
         <div className="tag-container">
-          <div className="tag-button-container">
-           {renderTagForm()}
-          </div>
-          <div className="tag-list-container">
-            {this.renderTags(note)}
-          </div>
+        <div className="tag-button-container">
+          {this.renderTagForm()}
         </div>
+        {this.renderTags(note)}
+      </div>
       </div>
     );
   }
- }
+}
 
 export default Note;

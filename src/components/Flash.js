@@ -8,6 +8,7 @@ class Flash extends React.Component {
     }, 2000);
   }
 
+
   render() {
     const { error } = this.props;
 

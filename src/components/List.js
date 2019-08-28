@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NoteCard from './NoteCard';
 
-class List extends Component {
-
+class List extends React.Component {
   componentWillMount() {
     this.props.getNotes();
   }
@@ -10,19 +9,22 @@ class List extends Component {
   render() {
     const { notes, getNote, deleteNote } = this.props;
 
-    const cards = notes.map((note, index) => {
-      return(<NoteCard
+  const cards = notes.map((note, index) => {
+    return (
+      <NoteCard
+        toggleNote={this.props.toggleNote}
         key={index}
         index={index}
         note={note}
         getNote={getNote}
         deleteNote={deleteNote}
-      />)
-    });
+      />
+    );
+  });
 
     return (
       <div className="list-container">
-        {cards}
+          {cards}
       </div>
     );
   }
